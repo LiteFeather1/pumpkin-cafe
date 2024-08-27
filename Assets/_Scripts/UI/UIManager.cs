@@ -134,7 +134,9 @@ public class UIManager : MonoBehaviour
         if (_currentClient != null)
             SetPatience(_currentClient.PatienceT);
 
-        i_cursor.transform.position = Input.mousePosition;
+        var pos = GameManager.Camera.ScreenToWorldPoint(Input.mousePosition);
+        pos.z = 0;
+        i_cursor.rectTransform.position = pos;
     }
 
     private IEnumerator FadeCanvasGroup(CanvasGroup group, float toAlpha, float time)
