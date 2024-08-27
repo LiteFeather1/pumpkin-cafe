@@ -16,7 +16,8 @@ public interface IDraggable : System.IComparable<IDraggable>
     public virtual void StartDragging()
     {
         IsDragging = true;
-        RB.velocity = Vector2.zero;
+        if (RB.bodyType != RigidbodyType2D.Static)
+            RB.velocity = Vector2.zero;
         RB.gravityScale = 0f;
         RB.rotation = 0f;
         RB.freezeRotation = true;
