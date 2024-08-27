@@ -44,6 +44,30 @@ public class GameManager : MonoBehaviour
         Instance = this;
         InputManager = new();
         Camera = Camera.main;
+
+        // Force Aspect Ratio
+        const float TARGET_RATIO = 16f / 9f;
+        var windowRatio = (float)Screen.width / Screen.height;
+        var scaleHeight = windowRatio / TARGET_RATIO;
+        var rect = Camera.rect;
+
+        if (scaleHeight < 1f)
+        {
+            rect.width = 1;
+            rect.height = scaleHeight;
+            rect.x = 0;
+            rect.y = (1f - scaleHeight) * .5f;
+
+        }
+        else
+        {
+            rect.width = 1f / scaleHeight;
+            rect.height = scaleHeight;
+            rect.x = (1f - scaleHeight) * .5f;
+            rect.y = 0f;
+        }
+
+        Camera.rect = rect;
     }
 
     private void OnEnable()
